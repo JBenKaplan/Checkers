@@ -2,6 +2,8 @@
 
 By: Ben Kaplan
 
+[Project Repo](https://github.com/JBenKaplan/Checkers) | [GitHub](https://github.com/JBenKaplan) | [Trello](https://trello.com/b/N2WlwgC4/checkers) | [LinkedIn](https://www.linkedin.com/in/jbenkaplan/)
+
 <br />
 
 ## Description
@@ -28,8 +30,8 @@ Two players take turns moving their pieces diagonally a square at a time. Jumpin
 
 <br />
 
-## Credits
+### Credits
 
 ---
 
-[Project Repo](https://github.com/JBenKaplan/Checkers) | [GitHub](https://github.com/JBenKaplan) | [Trello](https://trello.com/b/N2WlwgC4/checkers) | [LinkedIn](https://www.linkedin.com/in/jbenkaplan/)
+[Hasbro Official Rules](https://www.hasbro.com/common/instruct/Checkers.PDF)
