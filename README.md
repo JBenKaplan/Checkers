@@ -2,11 +2,13 @@
 
 By: Ben Kaplan
 
-[Project Repo](https://github.com/JBenKaplan/Checkers) | [GitHub](https://github.com/JBenKaplan) | [Trello](https://trello.com/b/N2WlwgC4/checkers) | [LinkedIn](https://www.linkedin.com/in/jbenkaplan/)
+---
+
+[GitHub](https://github.com/JBenKaplan) | [Trello](https://trello.com/b/N2WlwgC4/checkers) | [LinkedIn](https://www.linkedin.com/in/jbenkaplan/)
 
 <br />
 
-## Description
+## **_Description_**
 
 ---
 
@@ -14,13 +16,16 @@ A web-based game of checkers. Made to be played with 2 human players.
 
 <br />
 
-## Technologies Used
+## **_Technologies Used_**
 
 ---
 
-- HTML
-- CSS
-- JS
+- Coding
+  - HTML
+  - CSS
+  - JS
+- Deployment
+  - Surge
 
 <br />
 
@@ -30,8 +35,19 @@ Two players take turns moving their pieces diagonally a square at a time. Jumpin
 
 <br />
 
-### Credits
+### **_Credits_**
 
 ---
 
-[Hasbro Official Rules](https://www.hasbro.com/common/instruct/Checkers.PDF)
+- [Hasbro Official Rules](https://www.hasbro.com/common/instruct/Checkers.PDF)
+
+<br />
+
+### **_Future Updates_**
+
+---
+
+- []
+- []
+- []
+- []
