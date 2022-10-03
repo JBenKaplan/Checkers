@@ -10,25 +10,40 @@ console.log(blackPieces)
 console.log(redPieces)
 
 const movement = (player) => {
-  let move = 0
   player.forEach((piece) =>
     piece.addEventListener('click', () => {
       spaces.forEach((space) => {
         space.addEventListener('click', () => {
           space.appendChild(piece)
-          move++
-          console.log(move)
+          piece.removeEventListener('click', movement)
+          space.removeEventListener('click', movement)
         })
       })
     })
   )
 }
+// Other method for moving pieces?
+// if ((player = 'red')) {
+//   for (let i = 0; i < redPieces.length; i++) {
+//     redPieces[i].addEventListener('click', () => {
+//       for (let i = 0; i < spaces.length; i++) {
+//         spaces.appendChild(redPieces[i])
+//       }
+//     })
+//   }
+// } else {
+//   for (let i = 0; i < blackPieces.length; i++) {
+//     blackPieces[i].addEventListener('click', () => {
+//       spaces.appendChild(blackPieces[i])
+//     })
+//   }
+// }
 
 const playerSwitch = (player) => {
-  if (player === blackPieces) {
-    player = redPieces
+  if (player === 'black') {
+    player = 'red'
   } else {
-    player = blackPieces
+    player = 'black'
   }
 }
 
@@ -37,3 +52,4 @@ movement(player)
 const playGame = () => {}
 
 //Event Listeners
+// player.addEventListener('click', playGame)
