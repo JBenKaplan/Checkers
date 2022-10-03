@@ -1,0 +1,13 @@
+table {
+  height: 200px;
+  width: 200px;
+}
+
+td {
+  border: solid black 1px;
+  background-color: brown;
+}
+
+.nopiece {
+  background-color: bisque;
+}
