@@ -17,19 +17,20 @@ const board = [
   null
 ]
 
+//Gloabl Variables
 let spaces = document.querySelectorAll('td')
 let blackPieces = document.querySelectorAll('.blackPiece')
 let redPieces = document.querySelectorAll('.redPiece')
-
-let currentPlayer = redPieces
-
+let currentPlayer = 'red'
 let scoreRed = 0
 let scoreBlack = 0
 
+//Console Tests
 console.log(spaces)
 console.log(blackPieces)
 console.log(redPieces)
 
+//Piece properties
 let playPiece = {
   pieceID: -1,
   boardSpace: -1,
@@ -39,20 +40,84 @@ let playPiece = {
   moveNegFifth: false
 }
 
-let resetPiece = {
-  pieceID: -1,
-  boardSpace: -1,
-  moveThird: false,
-  moveFifth: false,
-  moveNegThird: false,
-  moveNegFifth: false
+let resetPiece = () => {
+  playPiece.pieceID = -1
+  playPiece.boardSpace = -1
+  playPiece.moveThird = false
+  playPiece.moveFifth = false
+  playPiece.moveNegThird = false
+  playPiece.moveNegFifth = false
 }
 
+//Add events listeners to pieces
+const addClicks = () => {
+  if (currentPlayer === 'red') {
+    for (let i = 0; i < redPieces.length; i++) {
+      redPieces[i].addEventListener('click', findPiece)
+    }
+  } else {
+    for (let i = 0; i < redPieces.length; i++) {
+      redPieces[i].addEventListener('click', findPiece)
+    }
+  }
+  removeBoardClicks()
+  resetPiece()
+  findPiece()
+}
+
+const removeBoardClicks = () => {
+  for (let i = 0; i < spaces.length; i++) {
+    spaces[i].removeAttribute('onclick')
+  }
+}
+
+const getPiece = () => {
+  playPiece.pieceID = parseInt(event.target.id)
+  playPiece.boardSpace = findPiece(playPiece.pieceID)
+  getSpaces()
+}
+
+const findPiece = () => {
+  let num = parseInt(playPiece.pieceID)
+  return board.indexOf(num)
+}
+
+const getSpaces = () => {
+  if (
+    board[playPiece.boardSpace + 3] === null &&
+    spaces[playPiece.boardSpace + 3].classList.contains('emptySpace') !== true
+  ) {
+    playPiece.moveThird = true
+  }
+}
+
+//Move piece method (renaming innerHTML instead of appendChild method)
+const movePiece = (spaceToMove) => {
+  document.getElementById(playPiece.pieceID).remove()
+  spaces[playPiece.boardSpace].innerHTML = ''
+  if (currentPlayer === 'red') {
+    spaces[
+      playPiece.boardSpace + spaceToMove
+    ].innerHTML = `<div class='redPiece' id='${playPiece.pieceID}'></div>`
+    redPieces = document.querySelectorAll('.redPiece')
+  } else {
+    spaces[
+      playPiece.boardSpace + spaceToMove
+    ].innerHTML = `<div class='blackPiece' id='${playPiece.pieceID}'></div>`
+    blackPieces = document.querySelectorAll('.redPiece')
+  }
+  let piecePlace = playPiece.boardSpace
+}
+
+const playGame = () => {
+  addClicks()
+}
+playGame()
 const playerSwitch = () => {
-  if (currentPlayer === redPieces) {
+  if (currentPlayer === 'red') {
     //disable cursor on black tiles
     //remove red piece movement -> future: except for movable
-    currentPlayer = blackPieces
+    currentPlayer = 'black'
     console.log('black')
     document.getElementsByTagName('p').style.pointerEvents = 'none'
     document.getElementsByTagName('td').style.pointerEvents = 'none'
@@ -61,7 +126,7 @@ const playerSwitch = () => {
   } else {
     //disable cursor on black tiles
     //remove black piece movement -> future: except for movable
-    currentPlayer = redPieces
+    currentPlayer = 'red'
     console.log('red')
     document.getElementsByTagName('div').style.pointerEvents = 'none'
     document.getElementsByTagName('td').style.pointerEvents = 'none'
@@ -69,25 +134,3 @@ const playerSwitch = () => {
     // movePiece(redPieces)
   }
 }
-
-const addClicks = () => {
-  if (currentPlayer === redPieces) {
-    for (let i = 0; i < redPieces.length; i++) {
-      redPieces[i].addEventListener('click', findPiece)
-    }
-  } else {
-    for (let i = 0; i < redPieces.length; i++) {
-      redPieces[i].addEventListener('click', findPiece)
-    }
-  }
-  movePiece()
-}
-
-let findPiece = () => {
-  let num = parseInt(playPiece.pieceID)
-  return board.indexOf(num)
-}
-
-const movePiece = () => {}
-
-addClicks()
