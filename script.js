@@ -32,9 +32,9 @@ let scoreBlack = 0
 let teamPieces
 
 //Console Tests
-console.log(spaces)
-console.log(blackPieces)
-console.log(redPieces)
+// console.log(spaces)
+// console.log(blackPieces)
+// console.log(redPieces)
 
 //Piece properties
 let playPiece = {
@@ -55,28 +55,19 @@ let resetPiece = () => {
   playPiece.moveNegFifth = false
 }
 
-//Switches players
-// const playerSwitch = () => {
-//   if (currentPlayer === 'red') {
-//     //disable cursor on black tiles
-//     //remove red piece movement -> future: except for movable
-//     currentPlayer = 'black'
-//     console.log('black')
-//     document.getElementsByTagName('p').style.pointerEvents = 'none'
-//     document.getElementsByTagName('td').style.pointerEvents = 'none'
-//     document.getElementsByTagName('p').style.cursor = 'auto'
-//     // movePiece(blackPieces)
-//   } else {
-//     //disable cursor on black tiles
-//     //remove black piece movement -> future: except for movable
-//     currentPlayer = 'red'
-//     console.log('red')
-//     document.getElementsByTagName('div').style.pointerEvents = 'none'
-//     document.getElementsByTagName('td').style.pointerEvents = 'none'
-//     document.getElementsByTagName('div').style.cursor = 'auto'
-//     // movePiece(redPieces)
-//   }
-// }
+// Switches players
+const playerSwitch = () => {
+  if (currentPlayer === 'red') {
+    currentPlayer = 'black'
+    document.querySelector('h1').innerHTML = `Black's Turn`
+    console.log('black')
+  } else {
+    currentPlayer = 'red'
+    document.querySelector('h1').innerHTML = `Red's Turn`
+    console.log('red')
+  }
+  startClicks()
+}
 
 //Add events listeners to pieces
 const startClicks = () => {
@@ -85,8 +76,8 @@ const startClicks = () => {
       redPieces[i].addEventListener('click', callPieces)
     }
   } else {
-    for (let i = 0; i < redPieces.length; i++) {
-      redPieces[i].addEventListener('click', callPieces)
+    for (let i = 0; i < blackPieces.length; i++) {
+      blackPieces[i].addEventListener('click', callPieces)
     }
   }
 }
@@ -111,13 +102,14 @@ const removeBoardClicks = () => {
 const removePieceClicks = () => {
   if (currentPlayer === 'red') {
     for (let i = 0; i < redPieces.length; i++) {
-      redPieces[i].removeEventListener('click', callPieces)
+      redPieces[i].removeEventListener('click', callPieces())
     }
   } else {
-    for (let i = 0; i < redPieces.length; i++) {
-      redPieces[i].removeEventListener('click', callPieces)
+    for (let i = 0; i < blackPieces.length; i++) {
+      blackPieces[i].removeEventListener('click', callPieces())
     }
   }
+  playerSwitch()
 }
 
 const getPiece = () => {
@@ -143,6 +135,18 @@ const getSpaces = () => {
     spaces[playPiece.boardSpace + 5].classList.contains('emptySpace') !== true
   ) {
     playPiece.moveFifth = true
+  }
+  if (
+    board[playPiece.boardSpace - 3] === null &&
+    spaces[playPiece.boardSpace - 3].classList.contains('emptySpace') !== true
+  ) {
+    playPiece.moveNegThird = true
+  }
+  if (
+    board[playPiece.boardSpace - 5] === null &&
+    spaces[playPiece.boardSpace - 5].classList.contains('emptySpace') !== true
+  ) {
+    playPiece.moveNegFifth = true
   }
   clickSpace()
 }
