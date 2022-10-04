@@ -1,5 +1,7 @@
 # Checkers
 
+![Checkers](checkers.gif)
+
 By: Ben Kaplan
 
 ---
