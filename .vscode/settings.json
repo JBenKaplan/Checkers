@@ -1,0 +1,6 @@
+{
+  "prettier.printWidth": 300,
+  "prettier.bracketSameLine": true,
+  "prettier.bracketSpacing": false,
+  "prettier.enable": true
+}
