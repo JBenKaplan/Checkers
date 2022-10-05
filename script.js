@@ -43,7 +43,8 @@ let playPiece = {
   moveThird: false,
   moveFifth: false,
   moveNegThird: false,
-  moveNegFifth: false
+  moveNegFifth: false,
+  jumpPiece: false
 }
 
 let resetPiece = () => {
@@ -53,6 +54,7 @@ let resetPiece = () => {
   playPiece.moveFifth = false
   playPiece.moveNegThird = false
   playPiece.moveNegFifth = false
+  playPiece.jumpPiece = false
 }
 
 // Switches players
@@ -73,16 +75,16 @@ const playerSwitch = () => {
 const startClicks = () => {
   if (currentPlayer === 'red') {
     for (let i = 0; i < redPieces.length; i++) {
-      redPieces[i].addEventListener('click', callPieces)
+      redPieces[i].addEventListener('click', getPlayerPieces)
     }
   } else {
     for (let i = 0; i < blackPieces.length; i++) {
-      blackPieces[i].addEventListener('click', callPieces)
+      blackPieces[i].addEventListener('click', getPlayerPieces)
     }
   }
 }
 
-const callPieces = () => {
+const getPlayerPieces = () => {
   if (currentPlayer === 'red') {
     teamPieces = redPieces
   } else {
@@ -102,11 +104,11 @@ const removeBoardClicks = () => {
 const removePieceClicks = () => {
   if (currentPlayer === 'red') {
     for (let i = 0; i < redPieces.length; i++) {
-      redPieces[i].removeEventListener('click', callPieces())
+      redPieces[i].removeEventListener('click', getPlayerPieces())
     }
   } else {
     for (let i = 0; i < blackPieces.length; i++) {
-      blackPieces[i].removeEventListener('click', callPieces())
+      blackPieces[i].removeEventListener('click', getPlayerPieces())
     }
   }
   playerSwitch()
@@ -115,7 +117,7 @@ const removePieceClicks = () => {
 const getPiece = () => {
   playPiece.pieceID = parseInt(event.target.id)
   playPiece.boardSpace = findPiece(playPiece.pieceID)
-  getSpaces()
+  openSpaces()
 }
 
 const findPiece = () => {
@@ -123,7 +125,7 @@ const findPiece = () => {
   return board.indexOf(num)
 }
 
-const getSpaces = () => {
+const openSpaces = () => {
   if (
     board[playPiece.boardSpace + 3] === null &&
     spaces[playPiece.boardSpace + 3].classList.contains('emptySpace') !== true
@@ -148,29 +150,24 @@ const getSpaces = () => {
   ) {
     playPiece.moveNegFifth = true
   }
-  clickSpace()
-}
-
-//Move piece method (renaming innerHTML instead of appendChild method)
-const movePiece = (spaceToMove) => {
-  document.getElementById(playPiece.pieceID).remove()
-  // console.log(playPiece)
-  spaces[playPiece.boardSpace].innerHTML = ''
-  console.log(spaces)
-  if (currentPlayer === 'red') {
-    //space to move not defined
-    spaces[
-      playPiece.boardSpace + spaceToMove
-    ].innerHTML = `<div class='redPiece' id="${playPiece.pieceID}"></div>`
-    redPieces = document.querySelectorAll('.redPiece')
-  } else {
-    spaces[
-      playPiece.boardSpace + spaceToMove
-    ].innerHTML = `<div class='blackPiece' id="${playPiece.pieceID}"></div>`
-    blackPieces = document.querySelectorAll('.blackPiece')
+  // Jump
+  if (
+    (board[playPiece.boardSpace + 6] === null &&
+      spaces[playPiece.boardSpace + 6].classList.contains('emptySpace') !==
+        true) ||
+    (board[playPiece.boardSpace + 10] === null &&
+      spaces[playPiece.boardSpace + 10].classList.contains('emptySpace') !==
+        true) ||
+    (board[playPiece.boardSpace - 6] === null &&
+      spaces[playPiece.boardSpace - 6].classList.contains('emptySpace') !==
+        true) ||
+    (board[playPiece.boardSpace - 10] === null &&
+      spaces[playPiece.boardSpace - 10].classList.contains('emptySpace') !==
+        true)
+  ) {
+    playPiece.jumpPiece = true
   }
-  let piecePlace = playPiece.boardSpace
-  updateBoard(piecePlace, piecePlace + spaceToMove)
+  clickSpace()
 }
 
 const clickSpace = () => {
@@ -186,8 +183,41 @@ const clickSpace = () => {
   if (playPiece.moveNegFifth) {
     spaces[playPiece.boardSpace - 5].setAttribute('onclick', 'movePiece(-5)')
   }
+  if (playPiece.jumpPiece) {
+    spaces[playPiece.boardSpace + 6].setAttribute('onclick', 'movePiece(10)')
+  }
+  if (playPiece.jumpPiece) {
+    spaces[playPiece.boardSpace - 6].setAttribute('onclick', 'movePiece(-10)')
+  }
+  if (playPiece.jumpPiece) {
+    spaces[playPiece.boardSpace + 10].setAttribute('onclick', 'movePiece(10)')
+  }
+  if (playPiece.jumpPiece) {
+    spaces[playPiece.boardSpace - 10].setAttribute('onclick', 'movePiece(-10)')
+  }
 }
 
+//Move piece method (renaming innerHTML instead of appendChild method)
+const movePiece = (spaceToMove) => {
+  document.getElementById(playPiece.pieceID).remove()
+  // console.log(playPiece)
+  spaces[playPiece.boardSpace].innerHTML = ''
+  console.log(spaces)
+  if (currentPlayer === 'red') {
+    spaces[
+      playPiece.boardSpace + spaceToMove
+    ].innerHTML = `<div class='redPiece' id="${playPiece.pieceID}"></div>`
+    redPieces = document.querySelectorAll('.redPiece')
+  } else {
+    spaces[
+      playPiece.boardSpace + spaceToMove
+    ].innerHTML = `<div class='blackPiece' id="${playPiece.pieceID}"></div>`
+    blackPieces = document.querySelectorAll('.blackPiece')
+  }
+  updateBoard(playPiece.boardSpace, playPiece.boardSpace + spaceToMove)
+}
+
+//Update board array with new piece info
 const updateBoard = (piecePlace, updatedSpace) => {
   board[piecePlace] = null
   board[updatedSpace] = parseInt(playPiece.pieceID)
