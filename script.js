@@ -31,6 +31,8 @@ let scoreRed = 0
 let scoreBlack = 0
 let teamPieces
 
+document.querySelector('h1').innerHTML = `${currentPlayer} begins!`
+
 //Console Tests
 // console.log(spaces)
 // console.log(blackPieces)
@@ -40,38 +42,38 @@ let teamPieces
 let playPiece = {
   pieceID: -1,
   boardSpace: -1,
-  moveThird: false,
-  moveFifth: false,
-  moveNegThird: false,
-  moveNegFifth: false,
-  jumpSix: false,
-  jumpNegSix: false,
-  jumpTen: false,
-  jumpNegTen: false
+  moveOne: false,
+  moveTwo: false,
+  moveNegativeOne: false,
+  moveNegativeTwo: false,
+  jumpOne: false,
+  jumpNegativeOne: false,
+  jumpTwo: false,
+  jumpNegativeTwo: false
 }
 
 let resetPiece = () => {
   playPiece.pieceID = -1
   playPiece.boardSpace = -1
-  playPiece.moveThird = false
-  playPiece.moveFifth = false
-  playPiece.moveNegThird = false
-  playPiece.moveNegFifth = false
-  playPiece.jumpSix = false
-  playPiece.jumpNegSix = false
-  playPiece.jumpTen = false
-  playPiece.jumpNegTen = false
+  playPiece.moveOne = false
+  playPiece.moveTwo = false
+  playPiece.moveNegativeOne = false
+  playPiece.moveNegativeTwo = false
+  playPiece.jumpOne = false
+  playPiece.jumpNegativeOne = false
+  playPiece.jumpTwo = false
+  playPiece.jumpNegativeTwo = false
 }
 
 // Switches players
 const playerSwitch = () => {
   if (currentPlayer === 'red') {
     currentPlayer = 'black'
-    document.querySelector('h1').innerHTML = `Black's Turn`
+    document.querySelector('h1').innerHTML = `black's turn`
     console.log('black')
   } else {
     currentPlayer = 'red'
-    document.querySelector('h1').innerHTML = `Red's Turn`
+    document.querySelector('h1').innerHTML = `red's turn`
     console.log('red')
   }
   startClicks()
@@ -131,54 +133,79 @@ const openSpaces = () => {
     board[playPiece.boardSpace + 3] === null &&
     spaces[playPiece.boardSpace + 3].classList.contains('emptySpace') !== true
   ) {
-    playPiece.moveThird = true
+    playPiece.moveOne = true
   }
   if (
     board[playPiece.boardSpace + 5] === null &&
     spaces[playPiece.boardSpace + 5].classList.contains('emptySpace') !== true
   ) {
-    playPiece.moveFifth = true
+    playPiece.moveTwo = true
   }
   if (
     board[playPiece.boardSpace - 3] === null &&
     spaces[playPiece.boardSpace - 3].classList.contains('emptySpace') !== true
   ) {
-    playPiece.moveNegThird = true
+    playPiece.moveNegativeOne = true
   }
   if (
     board[playPiece.boardSpace - 5] === null &&
     spaces[playPiece.boardSpace - 5].classList.contains('emptySpace') !== true
   ) {
-    playPiece.moveNegFifth = true
+    playPiece.moveNegativeTwo = true
   }
   //Jump Check
   if (
     board[playPiece.boardSpace + 6] === null &&
     spaces[playPiece.boardSpace + 6].classList.contains('emptySpace') !== true
   ) {
-    playPiece.jumpSix = true
+    playPiece.jumpOne = true
+  }
+  if (
+    board[playPiece.boardSpace - 6] === null &&
+    spaces[playPiece.boardSpace - 6].classList.contains('emptySpace') !== true
+  ) {
+    playPiece.jumpNegativeOne = true
+  }
+  if (
+    board[playPiece.boardSpace + 10] === null &&
+    spaces[playPiece.boardSpace + 10].classList.contains('emptySpace') !== true
+  ) {
+    playPiece.jumpTwo = true
+  }
+  if (
+    board[playPiece.boardSpace - 10] === null &&
+    spaces[playPiece.boardSpace - 10].classList.contains('emptySpace') !== true
+  ) {
+    playPiece.jumpNegativeTwo = true
   }
 
   clickSpace()
 }
 
-const canJump = () => {}
-
 const clickSpace = () => {
-  if (playPiece.moveThird) {
+  if (playPiece.moveOne) {
     spaces[playPiece.boardSpace + 3].setAttribute('onclick', 'movePiece(3)')
   }
-  if (playPiece.moveFifth) {
+  if (playPiece.moveTwo) {
     spaces[playPiece.boardSpace + 5].setAttribute('onclick', 'movePiece(5)')
   }
-  if (playPiece.moveNegThird) {
+  if (playPiece.moveNegativeOne) {
     spaces[playPiece.boardSpace - 3].setAttribute('onclick', 'movePiece(-3)')
   }
-  if (playPiece.moveNegFifth) {
+  if (playPiece.moveNegativeTwo) {
     spaces[playPiece.boardSpace - 5].setAttribute('onclick', 'movePiece(-5)')
   }
-  if (playPiece.jumpSix) {
+  if (playPiece.jumpOne) {
     spaces[playPiece.boardSpace + 6].setAttribute('onclick', 'movePiece(6)')
+  }
+  if (playPiece.jumpNegativeOne) {
+    spaces[playPiece.boardSpace - 6].setAttribute('onclick', 'movePiece(-6)')
+  }
+  if (playPiece.jumpTwo) {
+    spaces[playPiece.boardSpace + 10].setAttribute('onclick', 'movePiece(10)')
+  }
+  if (playPiece.jumpNegativeTwo) {
+    spaces[playPiece.boardSpace - 10].setAttribute('onclick', 'movePiece(-10)')
   }
 }
 
