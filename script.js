@@ -229,10 +229,6 @@ const movePiece = (spaceToMove) => {
     if (spaceToMove >= 6 || spaceToMove <= -6) {
       spaces[playPiece.boardSpace + spaceToMove / 2].innerHTML = ''
       scoreRed++
-      if (scoreRed === 2) {
-        console.log('red wins')
-        document.querySelector('h1').innerHTML = 'Red wins!'
-      }
     }
   } else {
     spaces[
@@ -243,10 +239,6 @@ const movePiece = (spaceToMove) => {
     if (spaceToMove >= 6 || spaceToMove <= -6) {
       spaces[playPiece.boardSpace + spaceToMove / 2].innerHTML = ''
       scoreBlack++
-      if (scoreBlack === 2) {
-        console.log('black wins')
-        document.querySelector('h1').innerHTML = 'Black wins!'
-      }
     }
   }
 
@@ -255,6 +247,18 @@ const movePiece = (spaceToMove) => {
   resetPiece()
   removeBoardClicks()
   removePieceClicks()
+  isWin()
+}
+
+const isWin = () => {
+  if (scoreRed === 2) {
+    console.log('red wins')
+    document.querySelector('h1').innerHTML = 'Red wins!'
+  }
+  if (scoreBlack === 2) {
+    console.log('black wins')
+    document.querySelector('h1').innerHTML = 'Black wins!'
+  }
 }
 
 startClicks()
