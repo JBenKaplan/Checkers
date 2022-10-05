@@ -44,7 +44,10 @@ let playPiece = {
   moveFifth: false,
   moveNegThird: false,
   moveNegFifth: false,
-  jumpPiece: false
+  jumpSix: false,
+  jumpNegSix: false,
+  jumpTen: false,
+  jumpNegTen: false
 }
 
 let resetPiece = () => {
@@ -54,7 +57,10 @@ let resetPiece = () => {
   playPiece.moveFifth = false
   playPiece.moveNegThird = false
   playPiece.moveNegFifth = false
-  playPiece.jumpPiece = false
+  playPiece.jumpSix = false
+  playPiece.jumpNegSix = false
+  playPiece.jumpTen = false
+  playPiece.jumpNegTen = false
 }
 
 // Switches players
@@ -116,13 +122,8 @@ const removePieceClicks = () => {
 
 const getPiece = () => {
   playPiece.pieceID = parseInt(event.target.id)
-  playPiece.boardSpace = findPiece(playPiece.pieceID)
+  playPiece.boardSpace = board.indexOf(playPiece.pieceID)
   openSpaces()
-}
-
-const findPiece = () => {
-  let num = parseInt(playPiece.pieceID)
-  return board.indexOf(num)
 }
 
 const openSpaces = () => {
@@ -150,25 +151,18 @@ const openSpaces = () => {
   ) {
     playPiece.moveNegFifth = true
   }
-  // Jump
+  //Jump Check
   if (
-    (board[playPiece.boardSpace + 6] === null &&
-      spaces[playPiece.boardSpace + 6].classList.contains('emptySpace') !==
-        true) ||
-    (board[playPiece.boardSpace + 10] === null &&
-      spaces[playPiece.boardSpace + 10].classList.contains('emptySpace') !==
-        true) ||
-    (board[playPiece.boardSpace - 6] === null &&
-      spaces[playPiece.boardSpace - 6].classList.contains('emptySpace') !==
-        true) ||
-    (board[playPiece.boardSpace - 10] === null &&
-      spaces[playPiece.boardSpace - 10].classList.contains('emptySpace') !==
-        true)
+    board[playPiece.boardSpace + 6] === null &&
+    spaces[playPiece.boardSpace + 6].classList.contains('emptySpace') !== true
   ) {
-    playPiece.jumpPiece = true
+    playPiece.jumpSix = true
   }
+
   clickSpace()
 }
+
+const canJump = () => {}
 
 const clickSpace = () => {
   if (playPiece.moveThird) {
@@ -183,17 +177,8 @@ const clickSpace = () => {
   if (playPiece.moveNegFifth) {
     spaces[playPiece.boardSpace - 5].setAttribute('onclick', 'movePiece(-5)')
   }
-  if (playPiece.jumpPiece) {
-    spaces[playPiece.boardSpace + 6].setAttribute('onclick', 'movePiece(10)')
-  }
-  if (playPiece.jumpPiece) {
-    spaces[playPiece.boardSpace - 6].setAttribute('onclick', 'movePiece(-10)')
-  }
-  if (playPiece.jumpPiece) {
-    spaces[playPiece.boardSpace + 10].setAttribute('onclick', 'movePiece(10)')
-  }
-  if (playPiece.jumpPiece) {
-    spaces[playPiece.boardSpace - 10].setAttribute('onclick', 'movePiece(-10)')
+  if (playPiece.jumpSix) {
+    spaces[playPiece.boardSpace + 6].setAttribute('onclick', 'movePiece(6)')
   }
 }
 
