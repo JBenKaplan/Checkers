@@ -26,7 +26,7 @@ let blackPieces = Array.from(black)
 let red = document.querySelectorAll('.redPiece')
 let redPieces = Array.from(red)
 
-let currentPlayer = 'red'
+let currentPlayer = 'black'
 let scoreRed = 0
 let scoreBlack = 0
 let teamPieces
@@ -197,15 +197,19 @@ const clickSpace = () => {
   }
   if (playPiece.jumpOne) {
     spaces[playPiece.boardSpace + 6].setAttribute('onclick', 'movePiece(6)')
+    // spaces[playPiece.boardSpace + 3] = null
   }
   if (playPiece.jumpNegativeOne) {
     spaces[playPiece.boardSpace - 6].setAttribute('onclick', 'movePiece(-6)')
+    // spaces[playPiece.boardSpace - 3] = null
   }
   if (playPiece.jumpTwo) {
     spaces[playPiece.boardSpace + 10].setAttribute('onclick', 'movePiece(10)')
+    // spaces[playPiece.boardSpace + 5] = null
   }
   if (playPiece.jumpNegativeTwo) {
     spaces[playPiece.boardSpace - 10].setAttribute('onclick', 'movePiece(-10)')
+    // spaces[playPiece.boardSpace - 5] = null
   }
 }
 
@@ -220,19 +224,34 @@ const movePiece = (spaceToMove) => {
       playPiece.boardSpace + spaceToMove
     ].innerHTML = `<div class='redPiece' id="${playPiece.pieceID}"></div>`
     redPieces = document.querySelectorAll('.redPiece')
+    //remove jumped black piece
+    board[playPiece.boardSpace + spaceToMove / 2] = null
+    if (spaceToMove >= 6 || spaceToMove <= -6) {
+      spaces[playPiece.boardSpace + spaceToMove / 2].innerHTML = ''
+      scoreRed++
+      if (scoreRed === 2) {
+        console.log('red wins')
+        document.querySelector('h1').innerHTML = 'Red wins!'
+      }
+    }
   } else {
     spaces[
       playPiece.boardSpace + spaceToMove
     ].innerHTML = `<div class='blackPiece' id="${playPiece.pieceID}"></div>`
     blackPieces = document.querySelectorAll('.blackPiece')
+    board[playPiece.boardSpace + spaceToMove / 2] = null
+    if (spaceToMove >= 6 || spaceToMove <= -6) {
+      spaces[playPiece.boardSpace + spaceToMove / 2].innerHTML = ''
+      scoreBlack++
+      if (scoreBlack === 2) {
+        console.log('black wins')
+        document.querySelector('h1').innerHTML = 'Black wins!'
+      }
+    }
   }
-  updateBoard(playPiece.boardSpace, playPiece.boardSpace + spaceToMove)
-}
 
-//Update board array with new piece info
-const updateBoard = (piecePlace, updatedSpace) => {
-  board[piecePlace] = null
-  board[updatedSpace] = parseInt(playPiece.pieceID)
+  board[playPiece.boardSpace] = null
+  board[playPiece.boardSpace + spaceToMove] = parseInt(playPiece.pieceID)
   resetPiece()
   removeBoardClicks()
   removePieceClicks()
