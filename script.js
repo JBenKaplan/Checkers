@@ -225,7 +225,6 @@ const clickSpace = () => {
   }
 }
 
-//Move piece method (renaming innerHTML instead of appendChild method)
 const movePiece = (spacesToMove) => {
   document.getElementById(playPiece.pieceID).remove()
   spaces[playPiece.boardSpace].innerHTML = ''
