@@ -37,8 +37,14 @@ const board = [
   null
 ]
 
-//Gloabl Variables
-let modeChange = document.querySelector('button') //dark mode button
+const darkMode = () => {
+  let button = document.body //dark mode button
+  button.classList.toggle('dark-mode')
+}
+
+const resetBoard = () => {
+  location.reload()
+}
 
 let tds = document.querySelectorAll('td')
 let spaces = Array.from(tds)
@@ -53,11 +59,9 @@ let scoreRed = 0
 let scoreBlack = 0
 let teamPieces
 
-document.querySelector('h1').innerHTML = `${currentPlayer} begins!`
-
 let playPiece = {
-  pieceID: -1,
-  boardSpace: -1,
+  pieceID: 0,
+  boardSpace: 0,
   moveOne: false,
   moveNegativeOne: false,
   moveTwo: false,
@@ -69,8 +73,8 @@ let playPiece = {
 }
 
 let resetPiece = () => {
-  playPiece.pieceID = -1
-  playPiece.boardSpace = -1
+  playPiece.pieceID = 0
+  playPiece.boardSpace = 0
   playPiece.moveOne = false
   playPiece.moveNegativeOne = false
   playPiece.moveTwo = false

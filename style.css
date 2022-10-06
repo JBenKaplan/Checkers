@@ -1,10 +1,15 @@
 body {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1/2;
   text-align: center;
   background-color: white;
   color: black;
 }
 
 table {
+  grid-row: 2/3;
+  grid-column: 2/3;
   height: auto;
   width: auto;
   margin: 0 auto;
@@ -53,4 +58,23 @@ td {
   border-radius: 50px;
   cursor: pointer;
   pointer-events: all;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+/* Source: 
+https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp
+*/
+
+.reds {
+  display: flex;
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+.blacks {
+  display: flex;
+  grid-column: 3/4;
+  grid-row: 2/3;
 }

@@ -4,94 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <script defer type="text/javascript" src="script.js"></script>
-    <title>Checkers</title>
+    <script defer type="text/javascript" src="index.js"></script>
+    <title>Rules</title>
   </head>
   <body>
-    <button class="modeChange">Dark Mode</button>
-    <h1></h1>
-    <table>
-      <!-- <tr>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="0"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="1"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="2"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="3"></div></td>
-      </tr> -->
-      <tr>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="1"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="2"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="3"></div></td>
-        <!-- <td class="space"><div class="redPiece" id="7"></div></td>
-          <td class="space emptySpace"></td> -->
-      </tr>
-      <tr>
-        <td class="space"><div class="redPiece" id="4"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="5"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="6"></div></td>
-        <td class="space emptySpace"></td>
-        <!-- <td class="space emptySpace"></td>
-        <td class="space"><div class="redPiece" id="11"></div></td> -->
-      </tr>
-      <tr>
-        <td class="space emptySpace"></td>
-        <td class="space"></td>
-        <td class="space emptySpace"></td>
-        <td class="space"></td>
-        <td class="space emptySpace"></td>
-        <td class="space"></td>
-        <!-- <td class="space"></td>
-        <td class="space emptySpace"></td> -->
-      </tr>
-      <tr>
-        <td class="space"></td>
-        <td class="space emptySpace"></td>
-        <td class="space"></td>
-        <td class="space emptySpace"></td>
-        <td class="space"></td>
-        <td class="space emptySpace"></td>
-        <!-- <td class="space emptySpace"></td>
-        <td class="space"></td> -->
-      </tr>
-      <tr>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="blackPiece" id="7"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="blackPiece" id="8"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="blackPiece" id="9"></div></td>
-        <!-- <td class="space"><div class="blackPiece" id="15"></div></td>
-          <td class="space emptySpace"></td> -->
-      </tr>
-      <tr>
-        <td class="space"><div class="blackPiece" id="10"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="blackPiece" id="11"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="blackPiece" id="12"></div></td>
-        <td class="space emptySpace"></td>
-        <!-- <td class="space emptySpace"></td>
-        <td class="space"><div class="blackPiece" id="19"></div></td> -->
-      </tr>
-      <!-- <tr>
-        <td class="space"><div class="blackPiece" id="20"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="blackPiece" id="21"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="blackPiece" id="22"></div></td>
-        <td class="space emptySpace"></td>
-        <td class="space"><div class="blackPiece" id="23"></div></td>
-        <td class="space emptySpace"></td>
-      </tr> -->
-    </table>
+    <h1>Welcome to Checkers!</h1>
+    <h2>Please read the rules below before proceding</h2>
+    <p>For this setup of checkers, each player has 6 pieces</p>
+    <ul>
+      <li>The first player to move is black</li>
+      <li>Each player is only allowed to move on dark tiles diagonally.</li>
+      <li>If a jump is availble, it must be taken</li>
+      <li>
+        Jumps can only be made diagonally when another empty square is available
+        behind the opponent
+      </li>
+      <li>Multiple jumps are not allowed</li>
+      <li>Backward movement is not allowed</li>
+      <li>
+        Once all of one players pieces have been captured, the game is over
+      </li>
+    </ul>
+    <button class="gamePage">
+      <a href="/game.html" target="_blank">Go To Game</a>
+    </button>
   </body>
 </html>
