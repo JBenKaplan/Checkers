@@ -4,20 +4,42 @@ const board = [
   null,
   2,
   null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
   3,
-  null,
   4,
+  null,
+  5,
+  null,
+  6,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  7,
+  null,
+  8,
+  null,
+  9,
+  10,
+  null,
+  11,
+  null,
+  12,
   null
 ]
 
 //Gloabl Variables
+let modeChange = document.querySelector('button') //dark mode button
+
 let tds = document.querySelectorAll('td')
 let spaces = Array.from(tds)
 
@@ -33,18 +55,12 @@ let teamPieces
 
 document.querySelector('h1').innerHTML = `${currentPlayer} begins!`
 
-//Console Tests
-// console.log(spaces)
-// console.log(blackPieces)
-// console.log(redPieces)
-
-//Piece properties
 let playPiece = {
   pieceID: -1,
   boardSpace: -1,
   moveOne: false,
-  moveTwo: false,
   moveNegativeOne: false,
+  moveTwo: false,
   moveNegativeTwo: false,
   jumpOne: false,
   jumpNegativeOne: false,
@@ -56,8 +72,8 @@ let resetPiece = () => {
   playPiece.pieceID = -1
   playPiece.boardSpace = -1
   playPiece.moveOne = false
-  playPiece.moveTwo = false
   playPiece.moveNegativeOne = false
+  playPiece.moveTwo = false
   playPiece.moveNegativeTwo = false
   playPiece.jumpOne = false
   playPiece.jumpNegativeOne = false
@@ -65,21 +81,17 @@ let resetPiece = () => {
   playPiece.jumpNegativeTwo = false
 }
 
-// Switches players
 const playerSwitch = () => {
   if (currentPlayer === 'red') {
     currentPlayer = 'black'
     document.querySelector('h1').innerHTML = `black's turn`
-    console.log('black')
   } else {
     currentPlayer = 'red'
     document.querySelector('h1').innerHTML = `red's turn`
-    console.log('red')
   }
   startClicks()
 }
 
-//Add events listeners to pieces
 const startClicks = () => {
   if (currentPlayer === 'red') {
     for (let i = 0; i < redPieces.length; i++) {
@@ -130,51 +142,51 @@ const getPiece = () => {
 
 const openSpaces = () => {
   if (
-    board[playPiece.boardSpace + 3] === null &&
-    spaces[playPiece.boardSpace + 3].classList.contains('emptySpace') !== true
-  ) {
-    playPiece.moveOne = true
-  }
-  if (
     board[playPiece.boardSpace + 5] === null &&
     spaces[playPiece.boardSpace + 5].classList.contains('emptySpace') !== true
   ) {
-    playPiece.moveTwo = true
-  }
-  if (
-    board[playPiece.boardSpace - 3] === null &&
-    spaces[playPiece.boardSpace - 3].classList.contains('emptySpace') !== true
-  ) {
-    playPiece.moveNegativeOne = true
+    playPiece.moveOne = true
   }
   if (
     board[playPiece.boardSpace - 5] === null &&
     spaces[playPiece.boardSpace - 5].classList.contains('emptySpace') !== true
   ) {
+    playPiece.moveNegativeOne = true
+  }
+  if (
+    board[playPiece.boardSpace + 7] === null &&
+    spaces[playPiece.boardSpace + 7].classList.contains('emptySpace') !== true
+  ) {
+    playPiece.moveTwo = true
+  }
+  if (
+    board[playPiece.boardSpace - 7] === null &&
+    spaces[playPiece.boardSpace - 7].classList.contains('emptySpace') !== true
+  ) {
     playPiece.moveNegativeTwo = true
   }
   //Jump Check
   if (
-    board[playPiece.boardSpace + 6] === null &&
-    spaces[playPiece.boardSpace + 6].classList.contains('emptySpace') !== true
+    board[playPiece.boardSpace + 10] === null &&
+    spaces[playPiece.boardSpace + 10].classList.contains('emptySpace') !== true
   ) {
     playPiece.jumpOne = true
   }
   if (
-    board[playPiece.boardSpace - 6] === null &&
-    spaces[playPiece.boardSpace - 6].classList.contains('emptySpace') !== true
+    board[playPiece.boardSpace - 10] === null &&
+    spaces[playPiece.boardSpace - 10].classList.contains('emptySpace') !== true
   ) {
     playPiece.jumpNegativeOne = true
   }
   if (
-    board[playPiece.boardSpace + 10] === null &&
-    spaces[playPiece.boardSpace + 10].classList.contains('emptySpace') !== true
+    board[playPiece.boardSpace + 14] === null &&
+    spaces[playPiece.boardSpace + 14].classList.contains('emptySpace') !== true
   ) {
     playPiece.jumpTwo = true
   }
   if (
-    board[playPiece.boardSpace - 10] === null &&
-    spaces[playPiece.boardSpace - 10].classList.contains('emptySpace') !== true
+    board[playPiece.boardSpace - 14] === null &&
+    spaces[playPiece.boardSpace - 14].classList.contains('emptySpace') !== true
   ) {
     playPiece.jumpNegativeTwo = true
   }
@@ -184,66 +196,64 @@ const openSpaces = () => {
 
 const clickSpace = () => {
   if (playPiece.moveOne) {
-    spaces[playPiece.boardSpace + 3].setAttribute('onclick', 'movePiece(3)')
-  }
-  if (playPiece.moveTwo) {
     spaces[playPiece.boardSpace + 5].setAttribute('onclick', 'movePiece(5)')
   }
   if (playPiece.moveNegativeOne) {
-    spaces[playPiece.boardSpace - 3].setAttribute('onclick', 'movePiece(-3)')
-  }
-  if (playPiece.moveNegativeTwo) {
     spaces[playPiece.boardSpace - 5].setAttribute('onclick', 'movePiece(-5)')
   }
+  if (playPiece.moveTwo) {
+    spaces[playPiece.boardSpace + 7].setAttribute('onclick', 'movePiece(7)')
+  }
+  if (playPiece.moveNegativeTwo) {
+    spaces[playPiece.boardSpace - 7].setAttribute('onclick', 'movePiece(-7)')
+  }
   if (playPiece.jumpOne) {
-    spaces[playPiece.boardSpace + 6].setAttribute('onclick', 'movePiece(6)')
-    // spaces[playPiece.boardSpace + 3] = null
+    spaces[playPiece.boardSpace + 10].setAttribute('onclick', 'movePiece(10)')
   }
   if (playPiece.jumpNegativeOne) {
-    spaces[playPiece.boardSpace - 6].setAttribute('onclick', 'movePiece(-6)')
-    // spaces[playPiece.boardSpace - 3] = null
+    spaces[playPiece.boardSpace - 10].setAttribute('onclick', 'movePiece(-10)')
   }
   if (playPiece.jumpTwo) {
-    spaces[playPiece.boardSpace + 10].setAttribute('onclick', 'movePiece(10)')
-    // spaces[playPiece.boardSpace + 5] = null
+    spaces[playPiece.boardSpace + 14].setAttribute('onclick', 'movePiece(14)')
   }
   if (playPiece.jumpNegativeTwo) {
-    spaces[playPiece.boardSpace - 10].setAttribute('onclick', 'movePiece(-10)')
-    // spaces[playPiece.boardSpace - 5] = null
+    spaces[playPiece.boardSpace - 14].setAttribute('onclick', 'movePiece(-14)')
   }
 }
 
 //Move piece method (renaming innerHTML instead of appendChild method)
-const movePiece = (spaceToMove) => {
+const movePiece = (spacesToMove) => {
   document.getElementById(playPiece.pieceID).remove()
-  // console.log(playPiece)
   spaces[playPiece.boardSpace].innerHTML = ''
   console.log(spaces)
   if (currentPlayer === 'red') {
     spaces[
-      playPiece.boardSpace + spaceToMove
+      playPiece.boardSpace + spacesToMove
     ].innerHTML = `<div class='redPiece' id="${playPiece.pieceID}"></div>`
     redPieces = document.querySelectorAll('.redPiece')
     //remove jumped black piece
-    board[playPiece.boardSpace + spaceToMove / 2] = null
-    if (spaceToMove >= 6 || spaceToMove <= -6) {
-      spaces[playPiece.boardSpace + spaceToMove / 2].innerHTML = ''
+    if (spacesToMove >= 10 || spacesToMove <= -10) {
+      board[playPiece.boardSpace + spacesToMove / 2] = null
+      spaces[playPiece.boardSpace + spacesToMove / 2].innerHTML = ''
       scoreRed++
+      console.log(scoreRed)
     }
   } else {
     spaces[
-      playPiece.boardSpace + spaceToMove
+      playPiece.boardSpace + spacesToMove
     ].innerHTML = `<div class='blackPiece' id="${playPiece.pieceID}"></div>`
     blackPieces = document.querySelectorAll('.blackPiece')
-    board[playPiece.boardSpace + spaceToMove / 2] = null
-    if (spaceToMove >= 6 || spaceToMove <= -6) {
-      spaces[playPiece.boardSpace + spaceToMove / 2].innerHTML = ''
+    //remove jumped red pieces
+    if (spacesToMove >= 10 || spacesToMove <= -10) {
+      board[playPiece.boardSpace + spacesToMove / 2] = null
+      spaces[playPiece.boardSpace + spacesToMove / 2].innerHTML = ''
       scoreBlack++
+      console.log(scoreBlack)
     }
   }
 
   board[playPiece.boardSpace] = null
-  board[playPiece.boardSpace + spaceToMove] = parseInt(playPiece.pieceID)
+  board[playPiece.boardSpace + spacesToMove] = parseInt(playPiece.pieceID)
   resetPiece()
   removeBoardClicks()
   removePieceClicks()
@@ -251,11 +261,11 @@ const movePiece = (spaceToMove) => {
 }
 
 const isWin = () => {
-  if (scoreRed === 2) {
+  if (scoreRed === 6) {
     console.log('red wins')
     document.querySelector('h1').innerHTML = 'Red wins!'
   }
-  if (scoreBlack === 2) {
+  if (scoreBlack === 6) {
     console.log('black wins')
     document.querySelector('h1').innerHTML = 'Black wins!'
   }
