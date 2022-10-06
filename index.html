@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
     <script defer type="text/javascript" src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+      function addDarkmodeWidget() {
+        new Darkmode().showWidget()
+      }
+      window.addEventListener('load', addDarkmodeWidget)
+    </script>
     <title>Rules</title>
   </head>
   <body>
@@ -29,6 +36,5 @@
     <button class="gamePage">
       <a href="/game.html" target="_blank">Go To Game</a>
     </button>
-    <button onclick="darkMode()">Dark Mode</button>
   </body>
 </html>

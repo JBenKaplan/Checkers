@@ -60,14 +60,6 @@ td {
   pointer-events: all;
 }
 
-.dark-mode {
-  background-color: black;
-  color: white;
-}
-/* Source: 
-https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp
-*/
-
 .reds {
   display: flex;
   grid-column: 1/2;
@@ -78,3 +70,6 @@ https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp
   grid-column: 3/4;
   grid-row: 2/3;
 }
+
+/* Darkmode.js api: 
+https://darkmodejs.learn.uno/ */
