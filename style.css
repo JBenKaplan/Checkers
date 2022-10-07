@@ -1,12 +1,17 @@
 body {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 1/2;
+  grid-template-rows: 100px 2fr;
   text-align: center;
+  background-image: url('images/PicnicTable.jpeg');
+  background-size: cover;
+  background-position: center;
   color: black;
 }
 
 table {
+  background-color: brown;
+  border: 5px brown solid;
   grid-row: 2/3;
   grid-column: 2/3;
   height: auto;
@@ -28,7 +33,7 @@ td {
   height: 60px;
   line-height: 0;
   border: solid black 1px;
-  background-color: gray;
+  background-color: #945b36;
 }
 
 .emptySpace {
@@ -74,5 +79,12 @@ td {
 .king {
   border: 2px gold solid;
 }
-/* Darkmode.js api: 
-https://darkmodejs.learn.uno/ */
+
+button {
+  grid-column: 3/4;
+}
+
+h1 {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
