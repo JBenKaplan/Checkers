@@ -1,6 +1,6 @@
 # Checkers
 
-![Checkers](6x6_board.gif)
+![Checkers](images/6x6_board.gif)
 
 By: Ben Kaplan
 
