@@ -1,2 +1,2 @@
-const darkMode = new Darkmode()
-darkMode.toggle()
+// const darkMode = new Darkmode()
+// darkMode.toggle()

@@ -1,3 +1,4 @@
+//Board data initialzation
 const board = [
   null,
   1,
@@ -37,22 +38,36 @@ const board = [
   null
 ]
 
-const darkMode = new Darkmode()
-darkMode.toggle()
+//Darkmode source: https://darkmodejs.learn.uno/
+const options = {
+  bottom: '64px', // default: '32px'
+  right: 'unset', // default: '32px'
+  left: '32px', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff', // default: '#fff'
+  buttonColorDark: '#100f2c', // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: false, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: true // default: true
+}
+const darkmode = new Darkmode(options)
+darkmode.showWidget()
 
+//Global Variables
 let tds = document.querySelectorAll('td')
 let spaces = Array.from(tds)
-
 let black = document.querySelectorAll('.blackPiece')
 let blackPieces = Array.from(black)
 let red = document.querySelectorAll('.redPiece')
 let redPieces = Array.from(red)
-
 let currentPlayer = 'black'
 let scoreRed = 0
 let scoreBlack = 0
 let teamPieces
 
+//Initial piece properties for tracking
 let playPiece = {
   pieceID: 0,
   boardSpace: 0,
@@ -81,6 +96,7 @@ let resetPiece = () => {
   playPiece.isKing = false
 }
 
+//Switches players
 const playerSwitch = () => {
   if (currentPlayer === 'red') {
     currentPlayer = 'black'
@@ -92,6 +108,7 @@ const playerSwitch = () => {
   startClicks()
 }
 
+//Standalone event listener initialization for play pieces
 const startClicks = () => {
   if (currentPlayer === 'red') {
     for (let i = 0; i < redPieces.length; i++) {
@@ -104,6 +121,7 @@ const startClicks = () => {
   }
 }
 
+//Sets pieces to be used
 const getPlayerPieces = () => {
   if (currentPlayer === 'red') {
     teamPieces = redPieces
@@ -115,12 +133,14 @@ const getPlayerPieces = () => {
   getPiece()
 }
 
+//Removes click listening on board spaces to reinitialize a clean click for movement
 const removeBoardClicks = () => {
   for (let i = 0; i < spaces.length; i++) {
     spaces[i].removeAttribute('onclick')
   }
 }
 
+//Removes click listening on game pieces to ensure players turn can only move their own pieces
 const removePieceClicks = () => {
   if (currentPlayer === 'red') {
     for (let i = 0; i < redPieces.length; i++) {
@@ -134,6 +154,7 @@ const removePieceClicks = () => {
   playerSwitch()
 }
 
+//Method recognizes which piece is being clicked in order to carryout movement
 const getPiece = () => {
   playPiece.pieceID = parseInt(event.target.id)
   playPiece.boardSpace = board.indexOf(playPiece.pieceID)
@@ -141,6 +162,7 @@ const getPiece = () => {
   openSpaces()
 }
 
+//Checks open spaces for movement as to not move onto an occupied tile
 const openSpaces = () => {
   if (
     board[playPiece.boardSpace + 5] === null &&
@@ -166,7 +188,7 @@ const openSpaces = () => {
   ) {
     playPiece.moveNegativeTwo = true
   }
-  //Jump Check
+  //Checks available spaces to jump to when a jump is available
   if (
     board[playPiece.boardSpace + 10] === null &&
     spaces[playPiece.boardSpace + 10].classList.contains('emptySpace') !== true
@@ -194,6 +216,7 @@ const openSpaces = () => {
   clickSpace()
 }
 
+//Sets the space on board to be moved to and excecutes the move method
 const clickSpace = () => {
   if (playPiece.moveNegativeOne) {
     spaces[playPiece.boardSpace - 5].setAttribute('onclick', 'movePiece(-5)')
@@ -221,6 +244,7 @@ const clickSpace = () => {
   }
 }
 
+//Moves the pieces on the board by completely removing the piece then recreating it on the space that was clicked. This was done instead of appending the piece to a space as it was more easily executed while writing.
 const movePiece = (spacesToMove) => {
   document.getElementById(playPiece.pieceID).remove()
   spaces[playPiece.boardSpace].innerHTML = ''
@@ -247,6 +271,7 @@ const movePiece = (spacesToMove) => {
       scoreBlack++
     }
   }
+  //Updates the board array data for computation
   board[playPiece.boardSpace] = null
   board[playPiece.boardSpace + spacesToMove] = parseInt(playPiece.pieceID)
   resetPiece()
@@ -255,6 +280,7 @@ const movePiece = (spacesToMove) => {
   isWin()
 }
 
+//Checks if a player has won
 const isWin = () => {
   if (scoreRed === 6) {
     console.log('red wins')

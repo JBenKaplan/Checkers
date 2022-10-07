@@ -2,5 +2,6 @@
 https://darkmodejs.learn.uno/ */
 
 body {
-  background-image: url('/rules_background.jpeg');
+  background-image: url('images/rules_background.jpeg');
+  margin: 95px 150px;
 }
