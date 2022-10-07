@@ -49,7 +49,6 @@ Two players take turns moving their pieces diagonally a square at a time. Jumpin
 
 ---
 
-- []
-- []
-- []
-- []
+- [ ] Implement king method logic
+- [ ] Scoreboard for captures and overall wins
+- [ ] Reset button to clear board without reloading page

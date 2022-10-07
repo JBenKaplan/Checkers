@@ -1,2 +1,6 @@
 /* Darkmode.js api: 
 https://darkmodejs.learn.uno/ */
+
+body {
+  background-image: url('/rules_background.jpeg');
+}

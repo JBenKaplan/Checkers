@@ -40,10 +40,6 @@ const board = [
 const darkMode = new Darkmode()
 darkMode.toggle()
 
-const resetBoard = () => {
-  location.reload()
-}
-
 let tds = document.querySelectorAll('td')
 let spaces = Array.from(tds)
 
@@ -67,7 +63,8 @@ let playPiece = {
   jumpOne: false,
   jumpNegativeOne: false,
   jumpTwo: false,
-  jumpNegativeTwo: false
+  jumpNegativeTwo: false,
+  isKing: false
 }
 
 let resetPiece = () => {
@@ -81,6 +78,7 @@ let resetPiece = () => {
   playPiece.jumpNegativeOne = false
   playPiece.jumpTwo = false
   playPiece.jumpNegativeTwo = false
+  playPiece.isKing = false
 }
 
 const playerSwitch = () => {
@@ -139,6 +137,7 @@ const removePieceClicks = () => {
 const getPiece = () => {
   playPiece.pieceID = parseInt(event.target.id)
   playPiece.boardSpace = board.indexOf(playPiece.pieceID)
+
   openSpaces()
 }
 
@@ -192,67 +191,62 @@ const openSpaces = () => {
   ) {
     playPiece.jumpNegativeTwo = true
   }
-
   clickSpace()
 }
 
 const clickSpace = () => {
-  if (playPiece.moveOne) {
-    spaces[playPiece.boardSpace + 5].setAttribute('onclick', 'movePiece(5)')
-  }
   if (playPiece.moveNegativeOne) {
     spaces[playPiece.boardSpace - 5].setAttribute('onclick', 'movePiece(-5)')
-  }
-  if (playPiece.moveTwo) {
-    spaces[playPiece.boardSpace + 7].setAttribute('onclick', 'movePiece(7)')
   }
   if (playPiece.moveNegativeTwo) {
     spaces[playPiece.boardSpace - 7].setAttribute('onclick', 'movePiece(-7)')
   }
-  if (playPiece.jumpOne) {
-    spaces[playPiece.boardSpace + 10].setAttribute('onclick', 'movePiece(10)')
-  }
   if (playPiece.jumpNegativeOne) {
     spaces[playPiece.boardSpace - 10].setAttribute('onclick', 'movePiece(-10)')
   }
-  if (playPiece.jumpTwo) {
-    spaces[playPiece.boardSpace + 14].setAttribute('onclick', 'movePiece(14)')
-  }
   if (playPiece.jumpNegativeTwo) {
     spaces[playPiece.boardSpace - 14].setAttribute('onclick', 'movePiece(-14)')
+  }
+  if (playPiece.moveOne) {
+    spaces[playPiece.boardSpace + 5].setAttribute('onclick', 'movePiece(5)')
+  }
+  if (playPiece.moveTwo) {
+    spaces[playPiece.boardSpace + 7].setAttribute('onclick', 'movePiece(7)')
+  }
+  if (playPiece.jumpOne) {
+    spaces[playPiece.boardSpace + 10].setAttribute('onclick', 'movePiece(10)')
+  }
+  if (playPiece.jumpTwo) {
+    spaces[playPiece.boardSpace + 14].setAttribute('onclick', 'movePiece(14)')
   }
 }
 
 const movePiece = (spacesToMove) => {
   document.getElementById(playPiece.pieceID).remove()
   spaces[playPiece.boardSpace].innerHTML = ''
-  console.log(spaces)
   if (currentPlayer === 'red') {
     spaces[
       playPiece.boardSpace + spacesToMove
     ].innerHTML = `<div class='redPiece' id="${playPiece.pieceID}"></div>`
     redPieces = document.querySelectorAll('.redPiece')
-    //remove jumped black piece
+    //Executes jump
     if (spacesToMove >= 10 || spacesToMove <= -10) {
       board[playPiece.boardSpace + spacesToMove / 2] = null
       spaces[playPiece.boardSpace + spacesToMove / 2].innerHTML = ''
       scoreRed++
-      console.log(scoreRed)
     }
   } else {
     spaces[
       playPiece.boardSpace + spacesToMove
     ].innerHTML = `<div class='blackPiece' id="${playPiece.pieceID}"></div>`
     blackPieces = document.querySelectorAll('.blackPiece')
-    //remove jumped red pieces
+    //Executes jump
     if (spacesToMove >= 10 || spacesToMove <= -10) {
       board[playPiece.boardSpace + spacesToMove / 2] = null
       spaces[playPiece.boardSpace + spacesToMove / 2].innerHTML = ''
       scoreBlack++
-      console.log(scoreBlack)
     }
   }
-
   board[playPiece.boardSpace] = null
   board[playPiece.boardSpace + spacesToMove] = parseInt(playPiece.pieceID)
   resetPiece()

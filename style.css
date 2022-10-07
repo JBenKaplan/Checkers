@@ -3,7 +3,6 @@ body {
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 1/2;
   text-align: center;
-  background-color: white;
   color: black;
 }
 
@@ -65,11 +64,15 @@ td {
   grid-column: 1/2;
   grid-row: 2/3;
 }
+
 .blacks {
   display: flex;
   grid-column: 3/4;
   grid-row: 2/3;
 }
 
+.king {
+  border: 2px gold solid;
+}
 /* Darkmode.js api: 
 https://darkmodejs.learn.uno/ */
