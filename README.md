@@ -6,7 +6,7 @@ By: Ben Kaplan
 
 ---
 
-[GitHub](https://github.com/JBenKaplan) | [Trello](https://trello.com/b/N2WlwgC4/checkers) | [LinkedIn](https://www.linkedin.com/in/jbenkaplan/)
+[GitHub](https://github.com/JBenKaplan) | [Trello](https://trello.com/b/N2WlwgC4/checkers) | [LinkedIn](https://www.linkedin.com/in/jbenkaplan/) | [Game Page](https://checkers-bk.surge.sh/)
 
 <br />
 
